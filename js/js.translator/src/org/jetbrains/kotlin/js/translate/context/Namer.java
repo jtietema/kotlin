@@ -32,6 +32,7 @@ import org.jetbrains.kotlin.incremental.components.NoLookupLocation;
 import org.jetbrains.kotlin.js.naming.NameSuggestion;
 import org.jetbrains.kotlin.js.naming.SuggestedName;
 import org.jetbrains.kotlin.js.resolve.JsPlatform;
+import org.jetbrains.kotlin.js.translate.utils.JsAstUtils;
 import org.jetbrains.kotlin.name.FqName;
 import org.jetbrains.kotlin.name.FqNameUnsafe;
 import org.jetbrains.kotlin.name.Name;
@@ -66,7 +67,7 @@ public final class Namer {
     public static final String PRIMITIVE_COMPARE_TO = "primitiveCompareTo";
     public static final String IS_CHAR = "isChar";
     public static final String IS_NUMBER = "isNumber";
-    public static final String IS_CHAR_SEQUENCE = "isCharSequence";
+    private static final String IS_CHAR_SEQUENCE = "isCharSequence";
 
     public static final String CALLEE_NAME = "$fun";
 
@@ -75,10 +76,6 @@ public final class Namer {
 
     public static final String OUTER_FIELD_NAME = "$outer";
 
-    private static final String CLASS_OBJECT_NAME = "createClass";
-    private static final String ENUM_CLASS_OBJECT_NAME = "createEnumClass";
-    private static final String TRAIT_OBJECT_NAME = "createTrait";
-    private static final String OBJECT_OBJECT_NAME = "createObject";
     private static final String CALLABLE_REF_FOR_MEMBER_FUNCTION_NAME = "getCallableRefForMemberFunction";
     private static final String CALLABLE_REF_FOR_EXTENSION_FUNCTION_NAME = "getCallableRefForExtensionFunction";
     private static final String CALLABLE_REF_FOR_LOCAL_EXTENSION_FUNCTION_NAME = "getCallableRefForLocalExtensionFunction";
@@ -87,12 +84,7 @@ public final class Namer {
     private static final String CALLABLE_REF_FOR_MEMBER_PROPERTY = "getCallableRefForMemberProperty";
     private static final String CALLABLE_REF_FOR_EXTENSION_PROPERTY = "getCallableRefForExtensionProperty";
 
-    private static final String SETTER_PREFIX = "set_";
-    private static final String GETTER_PREFIX = "get_";
-    private static final String BACKING_FIELD_PREFIX = "$";
     private static final String DELEGATE = "$delegate";
-
-    private static final String SUPER_METHOD_NAME = "baseInitializer";
 
     private static final String ROOT_PACKAGE = "_";
 
@@ -111,6 +103,14 @@ public final class Namer {
     private static final JsNameRef JS_OBJECT_CREATE_FUNCTION = new JsNameRef("create", JS_OBJECT);
 
     public static final String LOCAL_MODULE_PREFIX = "$module$";
+    public static final String METADATA = "$metadata$";
+    public static final String METADATA_SUPERTYPES = "baseClasses";
+
+    public static final String OBJECT_INSTANCE_VAR_SUFFIX = "_instance";
+    public static final String OBJECT_INSTANCE_FUNCTION_SUFFIX = "_getInstance";
+
+    public static final String ENUM_NAME_FIELD = "name$";
+    public static final String ENUM_ORDINAL_FIELD = "ordinal$";
 
     public static boolean isUndefined(@NotNull JsExpression expr) {
         if (expr instanceof JsPrefixOperation) {
@@ -147,47 +147,8 @@ public final class Namer {
     }
 
     @NotNull
-    public static JsNameRef superMethodNameRef(@NotNull JsName superClassJsName) {
-        return pureFqn(SUPER_METHOD_NAME, superClassJsName.makeRef());
-    }
-
-    @NotNull
-    public static String getNameForAccessor(@NotNull String propertyName, boolean isGetter, boolean useNativeAccessor) {
-        if (useNativeAccessor) {
-            return propertyName;
-        }
-
-        if (isGetter) {
-            return getNameForGetter(propertyName);
-        }
-        else {
-            return getNameForSetter(propertyName);
-        }
-    }
-
-    @NotNull
-    public static String getKotlinBackingFieldName(@NotNull String propertyName) {
-        return getNameWithPrefix(propertyName, BACKING_FIELD_PREFIX);
-    }
-
-    @NotNull
-    private static String getNameForGetter(@NotNull String propertyName) {
-        return getNameWithPrefix(propertyName, GETTER_PREFIX);
-    }
-
-    @NotNull
-    private static String getNameForSetter(@NotNull String propertyName) {
-        return getNameWithPrefix(propertyName, SETTER_PREFIX);
-    }
-
-    @NotNull
     public static String getPrototypeName() {
         return PROTOTYPE_NAME;
-    }
-
-    @NotNull
-    public static JsNameRef getRefToPrototype(@NotNull JsExpression classOrTraitExpression) {
-        return pureFqn(getPrototypeName(), classOrTraitExpression);
     }
 
     @NotNull
@@ -206,11 +167,6 @@ public final class Namer {
     }
 
     @NotNull
-    private static String getNameWithPrefix(@NotNull String name, @NotNull String prefix) {
-        return prefix + name;
-    }
-
-    @NotNull
     public static JsNameRef getFunctionCallRef(@NotNull JsExpression functionExpression) {
         return pureFqn(CALL_FUNCTION, functionExpression);
     }
@@ -222,7 +178,7 @@ public final class Namer {
 
     @NotNull
     public static JsInvocation createObjectWithPrototypeFrom(JsNameRef referenceToClass) {
-        return new JsInvocation(JS_OBJECT_CREATE_FUNCTION, getRefToPrototype(referenceToClass));
+        return new JsInvocation(JS_OBJECT_CREATE_FUNCTION, JsAstUtils.prototypeOf(referenceToClass));
     }
 
     @NotNull
@@ -242,18 +198,6 @@ public final class Namer {
 
     @NotNull
     private final JsObjectScope kotlinScope;
-    @NotNull
-    private final JsName className;
-    @NotNull
-    private final JsName enumClassName;
-    @NotNull
-    private final JsName traitName;
-    @NotNull
-    private final JsExpression definePackage;
-    @NotNull
-    private final JsExpression defineRootPackage;
-    @NotNull
-    private final JsName objectName;
     @NotNull
     private final JsName callableRefForMemberFunctionName;
     @NotNull
@@ -276,22 +220,12 @@ public final class Namer {
     @NotNull
     private final JsName isTypeName;
 
-    @NotNull
-    private final JsExpression modulesMap;
-
     private Namer(@NotNull JsScope rootScope) {
         kotlinScope = JsObjectScope(rootScope, "Kotlin standard object");
-        traitName = kotlinScope.declareName(TRAIT_OBJECT_NAME);
-
-        definePackage = kotlin("definePackage");
-        defineRootPackage = kotlin("defineRootPackage");
 
         callGetProperty = kotlin("callGetter");
         callSetProperty = kotlin("callSetter");
 
-        className = kotlinScope.declareName(CLASS_OBJECT_NAME);
-        enumClassName = kotlinScope.declareName(ENUM_CLASS_OBJECT_NAME);
-        objectName = kotlinScope.declareName(OBJECT_OBJECT_NAME);
         callableRefForMemberFunctionName = kotlinScope.declareName(CALLABLE_REF_FOR_MEMBER_FUNCTION_NAME);
         callableRefForExtensionFunctionName = kotlinScope.declareName(CALLABLE_REF_FOR_EXTENSION_FUNCTION_NAME);
         callableRefForLocalExtensionFunctionName = kotlinScope.declareName(CALLABLE_REF_FOR_LOCAL_EXTENSION_FUNCTION_NAME);
@@ -301,7 +235,6 @@ public final class Namer {
         callableRefForExtensionProperty = kotlinScope.declareName(CALLABLE_REF_FOR_EXTENSION_PROPERTY);
 
         isTypeName = kotlinScope.declareName("isType");
-        modulesMap = kotlin("modules");
     }
 
     // TODO: get rid of this function
@@ -313,36 +246,6 @@ public final class Namer {
         SuggestedName suggested = new NameSuggestion().suggest(functions.iterator().next());
         assert suggested != null : "Suggested name for class members is always non-null: " + functions.iterator().next();
         return suggested.getNames().get(0);
-    }
-
-    @NotNull
-    public JsExpression classCreationMethodReference() {
-        return kotlin(className);
-    }
-
-    @NotNull
-    public JsExpression enumClassCreationMethodReference() {
-        return kotlin(enumClassName);
-    }
-
-    @NotNull
-    public JsExpression traitCreationMethodReference() {
-        return kotlin(traitName);
-    }
-
-    @NotNull
-    public JsExpression packageDefinitionMethodReference() {
-        return definePackage;
-    }
-
-    @NotNull
-    public JsExpression rootPackageDefinitionMethodReference() {
-        return defineRootPackage;
-    }
-
-    @NotNull
-    public JsExpression objectCreationMethodReference() {
-        return kotlin(objectName);
     }
 
     @NotNull
@@ -486,43 +389,18 @@ public final class Namer {
     }
 
     @NotNull
-    public JsExpression classCreateInvocation(@NotNull ClassDescriptor descriptor) {
-        switch (descriptor.getKind()) {
-            case INTERFACE:
-                return traitCreationMethodReference();
-            case ENUM_CLASS:
-                return enumClassCreationMethodReference();
-            case ENUM_ENTRY:
-            case OBJECT:
-                return objectCreationMethodReference();
-            case ANNOTATION_CLASS:
-            case CLASS:
-                return classCreationMethodReference();
-            default:
-                throw new UnsupportedOperationException("Unsupported class kind: " + descriptor);
-        }
-    }
-
-    @NotNull
     public static JsExpression getUndefinedExpression() {
         return new JsPrefixOperation(JsUnaryOperator.VOID, JsNumberLiteral.ZERO);
     }
 
     @NotNull
     public JsExpression getCallGetProperty() {
-        return callGetProperty;
+        return callGetProperty.deepCopy();
     }
 
     @NotNull
     public JsExpression getCallSetProperty() {
-        return callSetProperty;
-    }
-
-    @NotNull
-    public JsExpression getModuleReference(@NotNull JsStringLiteral moduleName) {
-        JsArrayAccess result = new JsArrayAccess(modulesMap, moduleName);
-        MetadataProperties.setSideEffects(result, SideEffectKind.PURE);
-        return result;
+        return callSetProperty.deepCopy();
     }
 
     public static JsNameRef kotlinLong() {
