@@ -5,10 +5,11 @@ interface Test {
 
 class SomeTest : Test {
     val hello = 12
+    // Some comment
     <caret>
-    /**
-     * test
-     */
+    /*
+        Some another comment
+    */
     fun some() {
 
     }

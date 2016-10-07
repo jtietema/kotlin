@@ -27,8 +27,8 @@ class C : A() {
     }
 
     /*
-            Some another comment
-        */
+     Some another comment
+    */
     fun someAnotherFunction() {
 
     }
