@@ -320,11 +320,18 @@ object KotlinIntroduceVariableHandler : RefactoringActionHandler {
         return commonContainer.allChildren.lastOrNull { it.textRange.contains(startOffset) } ?: return null
     }
 
+    private fun PsiElement.isInAssignmentLHS(): Boolean {
+        return parents.any { KtPsiUtil.isAssignment(it) && PsiTreeUtil.isAncestor((it as KtBinaryExpression).left, this, false) }
+    }
+
     private fun KtExpression.findOccurrences(occurrenceContainer: PsiElement): List<KtExpression> {
         return toRange()
                 .match(occurrenceContainer, KotlinPsiUnifier.DEFAULT)
                 .mapNotNull {
                     val candidate = it.range.elements.first()
+
+                    if (candidate.isInAssignmentLHS()) return@mapNotNull null
+
                     when (candidate) {
                         is KtExpression -> candidate
                         is KtStringTemplateEntryWithExpression -> candidate.expression
@@ -693,6 +700,10 @@ object KotlinIntroduceVariableHandler : RefactoringActionHandler {
     ) {
         val expression = expressionToExtract?.let { KtPsiUtil.safeDeparenthesize(it) }
                          ?: return showErrorHint(project, editor, KotlinRefactoringBundle.message("cannot.refactor.no.expression"))
+
+        if (expression.isInAssignmentLHS()) {
+            return showErrorHint(project, editor, KotlinRefactoringBundle.message("cannot.refactor.no.expression"))
+        }
 
         val physicalExpression = expression.substringContextOrThis
 
