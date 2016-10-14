@@ -768,6 +768,11 @@ import org.w3c.xhr.*
     operator fun get(index: Int): StyleSheet? = noImpl
 }
 
+@native public interface LinkStyle {
+    val sheet: StyleSheet?
+        get() = noImpl
+}
+
 @native public abstract class CSSRuleList {
     open val length: Int
         get() = noImpl
@@ -847,6 +852,11 @@ import org.w3c.xhr.*
     open val namespaceURI: String
         get() = noImpl
     open val prefix: String
+        get() = noImpl
+}
+
+@native public interface ElementCSSInlineStyle {
+    val style: CSSStyleDeclaration
         get() = noImpl
 }
 

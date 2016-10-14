@@ -28,6 +28,16 @@ import org.w3c.xhr.*
     fun set(name: String, value: String): Unit = noImpl
 }
 
+@native public interface Body {
+    val bodyUsed: Boolean
+        get() = noImpl
+    fun arrayBuffer(): dynamic = noImpl
+    fun blob(): dynamic = noImpl
+    fun formData(): dynamic = noImpl
+    fun json(): dynamic = noImpl
+    fun text(): dynamic = noImpl
+}
+
 @native public open class Request(input: dynamic, init: RequestInit = noImpl) {
     open val method: String
         get() = noImpl

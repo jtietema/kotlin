@@ -434,7 +434,7 @@ import org.w3c.xhr.*
         get() = noImpl
     open val applicationCache: ApplicationCache
         get() = noImpl
-    open val external: dynamic
+    open val external: External
         get() = noImpl
     open val screen: Screen
         get() = noImpl
@@ -1387,6 +1387,41 @@ import org.w3c.xhr.*
 
 @native public abstract class HTMLBRElement : HTMLElement() {
     open var clear: String
+        get() = noImpl
+        set(value) = noImpl
+}
+
+@native public interface HTMLHyperlinkElementUtils {
+    var href: String
+        get() = noImpl
+        set(value) = noImpl
+    val origin: String
+        get() = noImpl
+    var protocol: String
+        get() = noImpl
+        set(value) = noImpl
+    var username: String
+        get() = noImpl
+        set(value) = noImpl
+    var password: String
+        get() = noImpl
+        set(value) = noImpl
+    var host: String
+        get() = noImpl
+        set(value) = noImpl
+    var hostname: String
+        get() = noImpl
+        set(value) = noImpl
+    var port: String
+        get() = noImpl
+        set(value) = noImpl
+    var pathname: String
+        get() = noImpl
+        set(value) = noImpl
+    var search: String
+        get() = noImpl
+        set(value) = noImpl
+    var hash: String
         get() = noImpl
         set(value) = noImpl
 }
@@ -3069,6 +3104,175 @@ public inline fun CanvasRenderingContext2DSettings(alpha: Boolean = true): Canva
     fun ellipse(x: Double, y: Double, radiusX: Double, radiusY: Double, rotation: Double, startAngle: Double, endAngle: Double, anticlockwise: Boolean = false): Unit = noImpl
 }
 
+@native public interface CanvasState {
+    fun save(): Unit = noImpl
+    fun restore(): Unit = noImpl
+}
+
+@native public interface CanvasTransform {
+    fun scale(x: Double, y: Double): Unit = noImpl
+    fun rotate(angle: Double): Unit = noImpl
+    fun translate(x: Double, y: Double): Unit = noImpl
+    fun transform(a: Double, b: Double, c: Double, d: Double, e: Double, f: Double): Unit = noImpl
+    fun getTransform(): DOMMatrix = noImpl
+    fun setTransform(a: Double, b: Double, c: Double, d: Double, e: Double, f: Double): Unit = noImpl
+    fun setTransform(transform: dynamic = noImpl): Unit = noImpl
+    fun resetTransform(): Unit = noImpl
+}
+
+@native public interface CanvasCompositing {
+    var globalAlpha: Double
+        get() = noImpl
+        set(value) = noImpl
+    var globalCompositeOperation: String
+        get() = noImpl
+        set(value) = noImpl
+}
+
+@native public interface CanvasImageSmoothing {
+    var imageSmoothingEnabled: Boolean
+        get() = noImpl
+        set(value) = noImpl
+    var imageSmoothingQuality: String
+        get() = noImpl
+        set(value) = noImpl
+}
+
+@native public interface CanvasFillStrokeStyles {
+    var strokeStyle: dynamic
+        get() = noImpl
+        set(value) = noImpl
+    var fillStyle: dynamic
+        get() = noImpl
+        set(value) = noImpl
+    fun createLinearGradient(x0: Double, y0: Double, x1: Double, y1: Double): CanvasGradient = noImpl
+    fun createRadialGradient(x0: Double, y0: Double, r0: Double, x1: Double, y1: Double, r1: Double): CanvasGradient = noImpl
+    fun createPattern(image: dynamic, repetition: String): CanvasPattern? = noImpl
+}
+
+@native public interface CanvasShadowStyles {
+    var shadowOffsetX: Double
+        get() = noImpl
+        set(value) = noImpl
+    var shadowOffsetY: Double
+        get() = noImpl
+        set(value) = noImpl
+    var shadowBlur: Double
+        get() = noImpl
+        set(value) = noImpl
+    var shadowColor: String
+        get() = noImpl
+        set(value) = noImpl
+}
+
+@native public interface CanvasFilters {
+    var filter: String
+        get() = noImpl
+        set(value) = noImpl
+}
+
+@native public interface CanvasRect {
+    fun clearRect(x: Double, y: Double, w: Double, h: Double): Unit = noImpl
+    fun fillRect(x: Double, y: Double, w: Double, h: Double): Unit = noImpl
+    fun strokeRect(x: Double, y: Double, w: Double, h: Double): Unit = noImpl
+}
+
+@native public interface CanvasDrawPath {
+    fun beginPath(): Unit = noImpl
+    fun fill(fillRule: String = "nonzero"): Unit = noImpl
+    fun fill(path: Path2D, fillRule: String = "nonzero"): Unit = noImpl
+    fun stroke(): Unit = noImpl
+    fun stroke(path: Path2D): Unit = noImpl
+    fun clip(fillRule: String = "nonzero"): Unit = noImpl
+    fun clip(path: Path2D, fillRule: String = "nonzero"): Unit = noImpl
+    fun resetClip(): Unit = noImpl
+    fun isPointInPath(x: Double, y: Double, fillRule: String = "nonzero"): Boolean = noImpl
+    fun isPointInPath(path: Path2D, x: Double, y: Double, fillRule: String = "nonzero"): Boolean = noImpl
+    fun isPointInStroke(x: Double, y: Double): Boolean = noImpl
+    fun isPointInStroke(path: Path2D, x: Double, y: Double): Boolean = noImpl
+}
+
+@native public interface CanvasUserInterface {
+    fun drawFocusIfNeeded(element: Element): Unit = noImpl
+    fun drawFocusIfNeeded(path: Path2D, element: Element): Unit = noImpl
+    fun scrollPathIntoView(): Unit = noImpl
+    fun scrollPathIntoView(path: Path2D): Unit = noImpl
+}
+
+@native public interface CanvasText {
+    fun fillText(text: String, x: Double, y: Double, maxWidth: Double = noImpl): Unit = noImpl
+    fun strokeText(text: String, x: Double, y: Double, maxWidth: Double = noImpl): Unit = noImpl
+    fun measureText(text: String): TextMetrics = noImpl
+}
+
+@native public interface CanvasDrawImage {
+    fun drawImage(image: dynamic, dx: Double, dy: Double): Unit = noImpl
+    fun drawImage(image: dynamic, dx: Double, dy: Double, dw: Double, dh: Double): Unit = noImpl
+    fun drawImage(image: dynamic, sx: Double, sy: Double, sw: Double, sh: Double, dx: Double, dy: Double, dw: Double, dh: Double): Unit = noImpl
+}
+
+@native public interface CanvasHitRegion {
+    fun addHitRegion(options: HitRegionOptions = noImpl): Unit = noImpl
+    fun removeHitRegion(id: String): Unit = noImpl
+    fun clearHitRegions(): Unit = noImpl
+}
+
+@native public interface CanvasImageData {
+    fun createImageData(sw: Double, sh: Double): ImageData = noImpl
+    fun createImageData(imagedata: ImageData): ImageData = noImpl
+    fun getImageData(sx: Double, sy: Double, sw: Double, sh: Double): ImageData = noImpl
+    fun putImageData(imagedata: ImageData, dx: Double, dy: Double): Unit = noImpl
+    fun putImageData(imagedata: ImageData, dx: Double, dy: Double, dirtyX: Double, dirtyY: Double, dirtyWidth: Double, dirtyHeight: Double): Unit = noImpl
+}
+
+@native public interface CanvasPathDrawingStyles {
+    var lineWidth: Double
+        get() = noImpl
+        set(value) = noImpl
+    var lineCap: String
+        get() = noImpl
+        set(value) = noImpl
+    var lineJoin: String
+        get() = noImpl
+        set(value) = noImpl
+    var miterLimit: Double
+        get() = noImpl
+        set(value) = noImpl
+    var lineDashOffset: Double
+        get() = noImpl
+        set(value) = noImpl
+    fun setLineDash(segments: Array<Double>): Unit = noImpl
+    fun getLineDash(): Array<Double> = noImpl
+}
+
+@native public interface CanvasTextDrawingStyles {
+    var font: String
+        get() = noImpl
+        set(value) = noImpl
+    var textAlign: String
+        get() = noImpl
+        set(value) = noImpl
+    var textBaseline: String
+        get() = noImpl
+        set(value) = noImpl
+    var direction: String
+        get() = noImpl
+        set(value) = noImpl
+}
+
+@native public interface CanvasPath {
+    fun closePath(): Unit = noImpl
+    fun moveTo(x: Double, y: Double): Unit = noImpl
+    fun lineTo(x: Double, y: Double): Unit = noImpl
+    fun quadraticCurveTo(cpx: Double, cpy: Double, x: Double, y: Double): Unit = noImpl
+    fun bezierCurveTo(cp1x: Double, cp1y: Double, cp2x: Double, cp2y: Double, x: Double, y: Double): Unit = noImpl
+    fun arcTo(x1: Double, y1: Double, x2: Double, y2: Double, radius: Double): Unit = noImpl
+    fun arcTo(x1: Double, y1: Double, x2: Double, y2: Double, radiusX: Double, radiusY: Double, rotation: Double): Unit = noImpl
+    fun rect(x: Double, y: Double, w: Double, h: Double): Unit = noImpl
+    fun arc(x: Double, y: Double, radius: Double, startAngle: Double, endAngle: Double, anticlockwise: Boolean = false): Unit = noImpl
+    fun ellipse(x: Double, y: Double, radiusX: Double, radiusY: Double, rotation: Double, startAngle: Double, endAngle: Double, anticlockwise: Boolean = false): Unit = noImpl
+}
+
 @native public abstract class CanvasGradient {
     fun addColorStop(offset: Double, color: String): Unit = noImpl
 }
@@ -3200,6 +3404,14 @@ public inline fun ElementDefinitionOptions(extends: String): ElementDefinitionOp
     o["extends"] = extends
 
     return o
+}
+
+@native public interface ElementContentEditable {
+    var contentEditable: String
+        get() = noImpl
+        set(value) = noImpl
+    val isContentEditable: Boolean
+        get() = noImpl
 }
 
 @native public abstract class DataTransfer {
@@ -3453,6 +3665,11 @@ public inline fun PageTransitionEventInit(persisted: Boolean = false, bubbles: B
     }
 }
 
+@native public interface NavigatorOnLine {
+    val onLine: Boolean
+        get() = noImpl
+}
+
 @native public open class ErrorEvent(type: String, eventInitDict: ErrorEventInit = noImpl) : Event(type, eventInitDict) {
     open val message: String
         get() = noImpl
@@ -3515,6 +3732,268 @@ public inline fun PromiseRejectionEventInit(promise: dynamic, reason: Any?, bubb
     return o
 }
 
+@native public interface GlobalEventHandlers {
+    var onabort: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onblur: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var oncancel: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var oncanplay: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var oncanplaythrough: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onchange: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onclick: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onclose: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var oncontextmenu: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var oncuechange: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var ondblclick: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var ondrag: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var ondragend: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var ondragenter: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var ondragexit: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var ondragleave: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var ondragover: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var ondragstart: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var ondrop: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var ondurationchange: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onemptied: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onended: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onerror: ((dynamic, String, Int, Int, Any?) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onfocus: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var oninput: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var oninvalid: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onkeydown: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onkeypress: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onkeyup: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onload: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onloadeddata: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onloadedmetadata: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onloadend: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onloadstart: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onmousedown: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onmouseenter: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onmouseleave: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onmousemove: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onmouseout: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onmouseover: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onmouseup: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onwheel: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onpause: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onplay: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onplaying: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onprogress: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onratechange: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onreset: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onresize: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onscroll: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onseeked: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onseeking: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onselect: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onshow: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onstalled: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onsubmit: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onsuspend: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var ontimeupdate: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var ontoggle: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onvolumechange: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onwaiting: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+}
+
+@native public interface WindowEventHandlers {
+    var onafterprint: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onbeforeprint: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onbeforeunload: ((Event) -> String?)?
+        get() = noImpl
+        set(value) = noImpl
+    var onhashchange: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onlanguagechange: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onmessage: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onoffline: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var ononline: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onpagehide: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onpageshow: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onpopstate: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onrejectionhandled: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onstorage: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onunhandledrejection: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onunload: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+}
+
+@native public interface DocumentAndElementEventHandlers {
+    var oncopy: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var oncut: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+    var onpaste: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+}
+
+@native public interface WindowOrWorkerGlobalScope {
+    val caches: CacheStorage
+        get() = noImpl
+    val origin: String
+        get() = noImpl
+    fun fetch(input: dynamic, init: RequestInit = noImpl): dynamic = noImpl
+    fun btoa(data: String): String = noImpl
+    fun atob(data: String): String = noImpl
+    fun setTimeout(handler: dynamic, timeout: Int = 0, vararg arguments: Any?): Int = noImpl
+    fun clearTimeout(handle: Int = 0): Unit = noImpl
+    fun setInterval(handler: dynamic, timeout: Int = 0, vararg arguments: Any?): Int = noImpl
+    fun clearInterval(handle: Int = 0): Unit = noImpl
+    fun createImageBitmap(image: dynamic, options: ImageBitmapOptions = noImpl): dynamic = noImpl
+    fun createImageBitmap(image: dynamic, sx: Int, sy: Int, sw: Int, sh: Int, options: ImageBitmapOptions = noImpl): dynamic = noImpl
+}
+
 @native public abstract class Navigator {
     open val serviceWorker: ServiceWorkerContainer
         get() = noImpl
@@ -3560,6 +4039,59 @@ public inline fun PromiseRejectionEventInit(promise: dynamic, reason: Any?, bubb
     fun isContentHandlerRegistered(mimeType: String, url: String): String = noImpl
     fun unregisterProtocolHandler(scheme: String, url: String): Unit = noImpl
     fun unregisterContentHandler(mimeType: String, url: String): Unit = noImpl
+    fun javaEnabled(): Boolean = noImpl
+}
+
+@native public interface NavigatorID {
+    val appCodeName: String
+        get() = noImpl
+    val appName: String
+        get() = noImpl
+    val appVersion: String
+        get() = noImpl
+    val platform: String
+        get() = noImpl
+    val product: String
+        get() = noImpl
+    val productSub: String
+        get() = noImpl
+    val userAgent: String
+        get() = noImpl
+    val vendor: String
+        get() = noImpl
+    val vendorSub: String
+        get() = noImpl
+    val oscpu: String
+        get() = noImpl
+    fun taintEnabled(): Boolean = noImpl
+}
+
+@native public interface NavigatorLanguage {
+    val language: String
+        get() = noImpl
+    val languages: dynamic
+        get() = noImpl
+}
+
+@native public interface NavigatorContentUtils {
+    fun registerProtocolHandler(scheme: String, url: String, title: String): Unit = noImpl
+    fun registerContentHandler(mimeType: String, url: String, title: String): Unit = noImpl
+    fun isProtocolHandlerRegistered(scheme: String, url: String): String = noImpl
+    fun isContentHandlerRegistered(mimeType: String, url: String): String = noImpl
+    fun unregisterProtocolHandler(scheme: String, url: String): Unit = noImpl
+    fun unregisterContentHandler(mimeType: String, url: String): Unit = noImpl
+}
+
+@native public interface NavigatorCookies {
+    val cookieEnabled: Boolean
+        get() = noImpl
+}
+
+@native public interface NavigatorPlugins {
+    val plugins: PluginArray
+        get() = noImpl
+    val mimeTypes: MimeTypeArray
+        get() = noImpl
     fun javaEnabled(): Boolean = noImpl
 }
 
@@ -3751,7 +4283,7 @@ public inline fun EventSourceInit(withCredentials: Boolean = false): EventSource
     fun send(data: String): Unit = noImpl
     fun send(data: Blob): Unit = noImpl
     fun send(data: ArrayBuffer): Unit = noImpl
-    fun send(data: dynamic): Unit = noImpl
+    fun send(data: ArrayBufferView): Unit = noImpl
 
     companion object {
         val CONNECTING: Short = 0
@@ -3878,6 +4410,12 @@ public inline fun CloseEventInit(wasClean: Boolean = false, code: Short = 0, rea
     fun close(): Unit = noImpl
 }
 
+@native public interface AbstractWorker {
+    var onerror: ((Event) -> dynamic)?
+        get() = noImpl
+        set(value) = noImpl
+}
+
 @native public open class Worker(scriptURL: String, options: WorkerOptions = noImpl) : EventTarget() {
     var onmessage: ((Event) -> dynamic)?
         get() = noImpl
@@ -3910,6 +4448,11 @@ public inline fun WorkerOptions(type: String = "classic", credentials: String = 
     var onerror: ((Event) -> dynamic)?
         get() = noImpl
         set(value) = noImpl
+}
+
+@native public interface NavigatorConcurrentHardware {
+    val hardwareConcurrency: Int
+        get() = noImpl
 }
 
 @native public abstract class WorkerNavigator {
@@ -3980,6 +4523,16 @@ public inline fun WorkerOptions(type: String = "classic", credentials: String = 
     operator fun set(key: String, value: String): Unit = noImpl
     fun removeItem(key: String): Unit = noImpl
     fun clear(): Unit = noImpl
+}
+
+@native public interface WindowSessionStorage {
+    val sessionStorage: Storage
+        get() = noImpl
+}
+
+@native public interface WindowLocalStorage {
+    val localStorage: Storage
+        get() = noImpl
 }
 
 @native public open class StorageEvent(type: String, eventInitDict: StorageEventInit = noImpl) : Event(type, eventInitDict) {
@@ -4205,6 +4758,11 @@ public inline fun StorageEventInit(key: String? = null, oldValue: String? = null
         set(value) = noImpl
 }
 
+@native public interface External {
+    fun AddSearchProvider(): Unit = noImpl
+    fun IsSearchProviderInstalled(): Unit = noImpl
+}
+
 @native public abstract class EventInit {
     open var bubbles: Boolean = false
     open var cancelable: Boolean = false
@@ -4271,6 +4829,49 @@ public inline fun AddEventListenerOptions(passive: Boolean = false, once: Boolea
     o["capture"] = capture
 
     return o
+}
+
+@native public interface NonElementParentNode {
+    fun getElementById(elementId: String): Element? = noImpl
+}
+
+@native public interface DocumentOrShadowRoot {
+    val fullscreenElement: Element?
+        get() = noImpl
+}
+
+@native public interface ParentNode {
+    val children: HTMLCollection
+        get() = noImpl
+    val firstElementChild: Element?
+        get() = noImpl
+    val lastElementChild: Element?
+        get() = noImpl
+    val childElementCount: Int
+        get() = noImpl
+    fun prepend(vararg nodes: dynamic): Unit = noImpl
+    fun append(vararg nodes: dynamic): Unit = noImpl
+    fun querySelector(selectors: String): Element? = noImpl
+    fun querySelectorAll(selectors: String): NodeList = noImpl
+}
+
+@native public interface NonDocumentTypeChildNode {
+    val previousElementSibling: Element?
+        get() = noImpl
+    val nextElementSibling: Element?
+        get() = noImpl
+}
+
+@native public interface ChildNode {
+    fun before(vararg nodes: dynamic): Unit = noImpl
+    fun after(vararg nodes: dynamic): Unit = noImpl
+    fun replaceWith(vararg nodes: dynamic): Unit = noImpl
+    fun remove(): Unit = noImpl
+}
+
+@native public interface Slotable {
+    val assignedSlot: HTMLSlotElement?
+        get() = noImpl
 }
 
 @native public abstract class NodeList {
@@ -4913,6 +5514,14 @@ public inline fun DOMRectInit(x: Double = 0.0, y: Double = 0.0, width: Double = 
     return o
 }
 
+@native public interface DOMRectList {
+    val length: Int
+        get() = noImpl
+    fun item(index: Int): DOMRect? = noImpl
+    @nativeGetter
+    operator fun get(index: Int): DOMRect? = noImpl
+}
+
 @native public open class DOMQuad {
     constructor(p1: DOMPointInit = noImpl, p2: DOMPointInit = noImpl, p3: DOMPointInit = noImpl, p4: DOMPointInit = noImpl)
     constructor(rect: DOMRectInit)
@@ -5217,6 +5826,13 @@ public inline fun ConvertCoordinateOptions(fromBox: String = "border", toBox: St
     o["toBox"] = toBox
 
     return o
+}
+
+@native public interface GeometryUtils {
+    fun getBoxQuads(options: BoxQuadOptions = noImpl): Array<DOMQuad> = noImpl
+    fun convertQuadFromNode(quad: dynamic, from: dynamic, options: ConvertCoordinateOptions = noImpl): DOMQuad = noImpl
+    fun convertRectFromNode(rect: DOMRectReadOnly, from: dynamic, options: ConvertCoordinateOptions = noImpl): DOMQuad = noImpl
+    fun convertPointFromNode(point: DOMPointInit, from: dynamic, options: ConvertCoordinateOptions = noImpl): DOMPoint = noImpl
 }
 
 @native public @marker interface UnionElementOrProcessingInstruction {

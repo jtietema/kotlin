@@ -28,6 +28,11 @@ import org.w3c.xhr.*
     fun now(): Double = noImpl
 }
 
+@native public interface GlobalPerformance {
+    val performance: Performance
+        get() = noImpl
+}
+
 @native public abstract class PerformanceTiming {
     open val navigationStart: Int
         get() = noImpl

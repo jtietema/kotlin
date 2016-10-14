@@ -470,6 +470,46 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
     operator fun set(index: Int, newItem: String): Unit = noImpl
 }
 
+@native public interface SVGUnitTypes {
+
+    companion object {
+        val SVG_UNIT_TYPE_UNKNOWN: Short = 0
+        val SVG_UNIT_TYPE_USERSPACEONUSE: Short = 1
+        val SVG_UNIT_TYPE_OBJECTBOUNDINGBOX: Short = 2
+    }
+}
+
+@native public interface SVGTests {
+    val requiredExtensions: SVGStringList
+        get() = noImpl
+    val systemLanguage: SVGStringList
+        get() = noImpl
+}
+
+@native public interface SVGFitToViewBox {
+    val viewBox: SVGAnimatedRect
+        get() = noImpl
+    val preserveAspectRatio: SVGAnimatedPreserveAspectRatio
+        get() = noImpl
+}
+
+@native public interface SVGZoomAndPan {
+    var zoomAndPan: Short
+        get() = noImpl
+        set(value) = noImpl
+
+    companion object {
+        val SVG_ZOOMANDPAN_UNKNOWN: Short = 0
+        val SVG_ZOOMANDPAN_DISABLE: Short = 1
+        val SVG_ZOOMANDPAN_MAGNIFY: Short = 2
+    }
+}
+
+@native public interface SVGURIReference {
+    val href: SVGAnimatedString
+        get() = noImpl
+}
+
 @native public abstract class SVGSVGElement : SVGGraphicsElement() {
     open val x: SVGAnimatedLength
         get() = noImpl
@@ -604,12 +644,26 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
         get() = noImpl
 }
 
+@native public open class SVGUseElementShadowRoot : ShadowRoot() {
+}
+
+@native public interface SVGElementInstance {
+    val correspondingElement: SVGElement?
+        get() = noImpl
+    val correspondingUseElement: SVGUseElement?
+        get() = noImpl
+}
+
 @native public open class ShadowAnimation(source: dynamic, newTarget: dynamic) {
     open val sourceAnimation: dynamic
         get() = noImpl
 }
 
 @native public abstract class SVGSwitchElement : SVGGraphicsElement() {
+}
+
+@native public interface GetSVGDocument {
+    fun getSVGDocument(): Document = noImpl
 }
 
 @native public abstract class SVGStyleElement : SVGElement() {
@@ -762,6 +816,13 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
 
 @native public abstract class SVGMeshElement : SVGGeometryElement() {
     open val href: SVGAnimatedString
+        get() = noImpl
+}
+
+@native public interface SVGAnimatedPoints {
+    val points: SVGPointList
+        get() = noImpl
+    val animatedPoints: SVGPointList
         get() = noImpl
 }
 
