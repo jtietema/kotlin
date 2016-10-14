@@ -73,15 +73,12 @@ import org.w3c.xhr.*
     fun skipWaiting(): dynamic = noImpl
 }
 
-@native public abstract class ServiceWorker : EventTarget(), UnionMessagePortOrServiceWorker, UnionClientOrMessagePortOrServiceWorker {
+@native public abstract class ServiceWorker : EventTarget(), AbstractWorker, UnionMessagePortOrServiceWorker, UnionClientOrMessagePortOrServiceWorker {
     open val scriptURL: String
         get() = noImpl
     open val state: String
         get() = noImpl
     open var onstatechange: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onerror: ((Event) -> dynamic)?
         get() = noImpl
         set(value) = noImpl
     fun postMessage(message: Any?, transfer: Array<dynamic> = noImpl): Unit = noImpl

@@ -38,7 +38,7 @@ import org.w3c.xhr.*
     fun text(): dynamic = noImpl
 }
 
-@native public open class Request(input: dynamic, init: RequestInit = noImpl) {
+@native public open class Request(input: dynamic, init: RequestInit = noImpl) : Body {
     open val method: String
         get() = noImpl
     open val url: String
@@ -65,14 +65,7 @@ import org.w3c.xhr.*
         get() = noImpl
     open val keepalive: Boolean
         get() = noImpl
-    open val bodyUsed: Boolean
-        get() = noImpl
     fun clone(): Request = noImpl
-    fun arrayBuffer(): dynamic = noImpl
-    fun blob(): dynamic = noImpl
-    fun formData(): dynamic = noImpl
-    fun json(): dynamic = noImpl
-    fun text(): dynamic = noImpl
 }
 
 @native public abstract class RequestInit {
@@ -110,7 +103,7 @@ public inline fun RequestInit(method: String, headers: dynamic, body: dynamic, r
     return o
 }
 
-@native public open class Response(body: dynamic = null, init: ResponseInit = noImpl) {
+@native public open class Response(body: dynamic = null, init: ResponseInit = noImpl) : Body {
     open val type: String
         get() = noImpl
     open val url: String
@@ -129,14 +122,7 @@ public inline fun RequestInit(method: String, headers: dynamic, body: dynamic, r
         get() = noImpl
     open val trailer: dynamic
         get() = noImpl
-    open val bodyUsed: Boolean
-        get() = noImpl
     fun clone(): Response = noImpl
-    fun arrayBuffer(): dynamic = noImpl
-    fun blob(): dynamic = noImpl
-    fun formData(): dynamic = noImpl
-    fun json(): dynamic = noImpl
-    fun text(): dynamic = noImpl
 
     companion object {
         fun error(): Response = noImpl

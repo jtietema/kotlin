@@ -20,7 +20,7 @@ import org.w3c.performance.*
 import org.w3c.workers.*
 import org.w3c.xhr.*
 
-@native public abstract class SVGElement : Element() {
+@native public abstract class SVGElement : Element(), ElementCSSInlineStyle, GlobalEventHandlers, SVGElementInstance {
     open val dataset: DOMStringMap
         get() = noImpl
     open val ownerSVGElement: SVGSVGElement?
@@ -30,195 +30,6 @@ import org.w3c.xhr.*
     open var tabIndex: Int
         get() = noImpl
         set(value) = noImpl
-    open val style: CSSStyleDeclaration
-        get() = noImpl
-    open var onabort: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onblur: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var oncancel: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var oncanplay: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var oncanplaythrough: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onchange: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onclick: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onclose: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var oncontextmenu: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var oncuechange: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var ondblclick: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var ondrag: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var ondragend: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var ondragenter: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var ondragexit: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var ondragleave: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var ondragover: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var ondragstart: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var ondrop: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var ondurationchange: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onemptied: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onended: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onerror: ((dynamic, String, Int, Int, Any?) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onfocus: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var oninput: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var oninvalid: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onkeydown: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onkeypress: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onkeyup: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onload: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onloadeddata: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onloadedmetadata: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onloadend: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onloadstart: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onmousedown: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onmouseenter: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onmouseleave: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onmousemove: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onmouseout: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onmouseover: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onmouseup: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onwheel: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onpause: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onplay: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onplaying: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onprogress: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onratechange: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onreset: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onresize: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onscroll: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onseeked: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onseeking: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onselect: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onshow: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onstalled: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onsubmit: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onsuspend: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var ontimeupdate: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var ontoggle: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onvolumechange: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onwaiting: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open val correspondingElement: SVGElement?
-        get() = noImpl
-    open val correspondingUseElement: SVGUseElement?
-        get() = noImpl
     fun focus(): Unit = noImpl
     fun blur(): Unit = noImpl
 }
@@ -242,12 +53,8 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
     return o
 }
 
-@native public abstract class SVGGraphicsElement : SVGElement() {
+@native public abstract class SVGGraphicsElement : SVGElement(), SVGTests {
     open val transform: SVGAnimatedTransformList
-        get() = noImpl
-    open val requiredExtensions: SVGStringList
-        get() = noImpl
-    open val systemLanguage: SVGStringList
         get() = noImpl
     fun getBBox(options: SVGBoundingBoxOptions = noImpl): DOMRect = noImpl
     fun getCTM(): DOMMatrix? = noImpl
@@ -510,7 +317,7 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
         get() = noImpl
 }
 
-@native public abstract class SVGSVGElement : SVGGraphicsElement() {
+@native public abstract class SVGSVGElement : SVGGraphicsElement(), SVGFitToViewBox, SVGZoomAndPan, WindowEventHandlers {
     open val x: SVGAnimatedLength
         get() = noImpl
     open val y: SVGAnimatedLength
@@ -524,58 +331,6 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
         set(value) = noImpl
     open val currentTranslate: DOMPointReadOnly
         get() = noImpl
-    open val viewBox: SVGAnimatedRect
-        get() = noImpl
-    open val preserveAspectRatio: SVGAnimatedPreserveAspectRatio
-        get() = noImpl
-    open var zoomAndPan: Short
-        get() = noImpl
-        set(value) = noImpl
-    open var onafterprint: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onbeforeprint: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onbeforeunload: ((Event) -> String?)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onhashchange: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onlanguagechange: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onmessage: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onoffline: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var ononline: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onpagehide: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onpageshow: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onpopstate: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onrejectionhandled: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onstorage: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onunhandledrejection: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
-    open var onunload: ((Event) -> dynamic)?
-        get() = noImpl
-        set(value) = noImpl
     fun getIntersectionList(rect: DOMRectReadOnly, referenceElement: SVGElement?): NodeList = noImpl
     fun getEnclosureList(rect: DOMRectReadOnly, referenceElement: SVGElement?): NodeList = noImpl
     fun checkIntersection(element: SVGElement, rect: DOMRectReadOnly): Boolean = noImpl
@@ -620,14 +375,10 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
 @native public abstract class SVGTitleElement : SVGElement() {
 }
 
-@native public abstract class SVGSymbolElement : SVGGraphicsElement() {
-    open val viewBox: SVGAnimatedRect
-        get() = noImpl
-    open val preserveAspectRatio: SVGAnimatedPreserveAspectRatio
-        get() = noImpl
+@native public abstract class SVGSymbolElement : SVGGraphicsElement(), SVGFitToViewBox {
 }
 
-@native public abstract class SVGUseElement : SVGGraphicsElement() {
+@native public abstract class SVGUseElement : SVGGraphicsElement(), SVGURIReference {
     open val x: SVGAnimatedLength
         get() = noImpl
     open val y: SVGAnimatedLength
@@ -639,8 +390,6 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
     open val instanceRoot: SVGElement?
         get() = noImpl
     open val animatedInstanceRoot: SVGElement?
-        get() = noImpl
-    open val href: SVGAnimatedString
         get() = noImpl
 }
 
@@ -666,7 +415,7 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
     fun getSVGDocument(): Document = noImpl
 }
 
-@native public abstract class SVGStyleElement : SVGElement() {
+@native public abstract class SVGStyleElement : SVGElement(), LinkStyle {
     open var type: String
         get() = noImpl
         set(value) = noImpl
@@ -676,8 +425,6 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
     open var title: String
         get() = noImpl
         set(value) = noImpl
-    open val sheet: StyleSheet?
-        get() = noImpl
 }
 
 @native public abstract class SVGTransform {
@@ -814,9 +561,7 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
         get() = noImpl
 }
 
-@native public abstract class SVGMeshElement : SVGGeometryElement() {
-    open val href: SVGAnimatedString
-        get() = noImpl
+@native public abstract class SVGMeshElement : SVGGeometryElement(), SVGURIReference {
 }
 
 @native public interface SVGAnimatedPoints {
@@ -844,18 +589,10 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
     operator fun set(index: Int, newItem: DOMPoint): Unit = noImpl
 }
 
-@native public abstract class SVGPolylineElement : SVGGeometryElement() {
-    open val points: SVGPointList
-        get() = noImpl
-    open val animatedPoints: SVGPointList
-        get() = noImpl
+@native public abstract class SVGPolylineElement : SVGGeometryElement(), SVGAnimatedPoints {
 }
 
-@native public abstract class SVGPolygonElement : SVGGeometryElement() {
-    open val points: SVGPointList
-        get() = noImpl
-    open val animatedPoints: SVGPointList
-        get() = noImpl
+@native public abstract class SVGPolygonElement : SVGGeometryElement(), SVGAnimatedPoints {
 }
 
 @native public abstract class SVGTextContentElement : SVGGraphicsElement() {
@@ -899,14 +636,12 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
 @native public abstract class SVGTSpanElement : SVGTextPositioningElement() {
 }
 
-@native public abstract class SVGTextPathElement : SVGTextContentElement() {
+@native public abstract class SVGTextPathElement : SVGTextContentElement(), SVGURIReference {
     open val startOffset: SVGAnimatedLength
         get() = noImpl
     open val method: SVGAnimatedEnumeration
         get() = noImpl
     open val spacing: SVGAnimatedEnumeration
-        get() = noImpl
-    open val href: SVGAnimatedString
         get() = noImpl
 
     companion object {
@@ -919,7 +654,7 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
     }
 }
 
-@native public abstract class SVGImageElement : SVGGraphicsElement(), HTMLOrSVGImageElement {
+@native public abstract class SVGImageElement : SVGGraphicsElement(), SVGURIReference, HTMLOrSVGImageElement {
     open val x: SVGAnimatedLength
         get() = noImpl
     open val y: SVGAnimatedLength
@@ -933,8 +668,6 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
     open var crossOrigin: String?
         get() = noImpl
         set(value) = noImpl
-    open val href: SVGAnimatedString
-        get() = noImpl
 }
 
 @native public abstract class SVGForeignObjectElement : SVGGraphicsElement() {
@@ -948,7 +681,7 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
         get() = noImpl
 }
 
-@native public abstract class SVGMarkerElement : SVGElement() {
+@native public abstract class SVGMarkerElement : SVGElement(), SVGFitToViewBox {
     open val refX: SVGAnimatedLength
         get() = noImpl
     open val refY: SVGAnimatedLength
@@ -966,10 +699,6 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
     open var orient: String
         get() = noImpl
         set(value) = noImpl
-    open val viewBox: SVGAnimatedRect
-        get() = noImpl
-    open val preserveAspectRatio: SVGAnimatedPreserveAspectRatio
-        get() = noImpl
     fun setOrientToAuto(): Unit = noImpl
     fun setOrientToAngle(angle: SVGAngle): Unit = noImpl
 
@@ -986,14 +715,12 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
 @native public abstract class SVGSolidcolorElement : SVGElement() {
 }
 
-@native public abstract class SVGGradientElement : SVGElement() {
+@native public abstract class SVGGradientElement : SVGElement(), SVGURIReference, SVGUnitTypes {
     open val gradientUnits: SVGAnimatedEnumeration
         get() = noImpl
     open val gradientTransform: SVGAnimatedTransformList
         get() = noImpl
     open val spreadMethod: SVGAnimatedEnumeration
-        get() = noImpl
-    open val href: SVGAnimatedString
         get() = noImpl
 
     companion object {
@@ -1047,7 +774,7 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
         get() = noImpl
 }
 
-@native public abstract class SVGPatternElement : SVGElement() {
+@native public abstract class SVGPatternElement : SVGElement(), SVGFitToViewBox, SVGURIReference, SVGUnitTypes {
     open val patternUnits: SVGAnimatedEnumeration
         get() = noImpl
     open val patternContentUnits: SVGAnimatedEnumeration
@@ -1061,12 +788,6 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
     open val width: SVGAnimatedLength
         get() = noImpl
     open val height: SVGAnimatedLength
-        get() = noImpl
-    open val viewBox: SVGAnimatedRect
-        get() = noImpl
-    open val preserveAspectRatio: SVGAnimatedPreserveAspectRatio
-        get() = noImpl
-    open val href: SVGAnimatedString
         get() = noImpl
 
     companion object {
@@ -1082,27 +803,23 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
 @native public abstract class SVGHatchpathElement : SVGElement() {
 }
 
-@native public abstract class SVGCursorElement : SVGElement() {
+@native public abstract class SVGCursorElement : SVGElement(), SVGURIReference {
     open val x: SVGAnimatedLength
         get() = noImpl
     open val y: SVGAnimatedLength
         get() = noImpl
-    open val href: SVGAnimatedString
-        get() = noImpl
 }
 
-@native public abstract class SVGScriptElement : SVGElement(), HTMLOrSVGScriptElement {
+@native public abstract class SVGScriptElement : SVGElement(), SVGURIReference, HTMLOrSVGScriptElement {
     open var type: String
         get() = noImpl
         set(value) = noImpl
     open var crossOrigin: String?
         get() = noImpl
         set(value) = noImpl
-    open val href: SVGAnimatedString
-        get() = noImpl
 }
 
-@native public abstract class SVGAElement : SVGGraphicsElement() {
+@native public abstract class SVGAElement : SVGGraphicsElement(), SVGURIReference {
     open val target: SVGAnimatedString
         get() = noImpl
     open val download: SVGAnimatedString
@@ -1115,47 +832,9 @@ public inline fun SVGBoundingBoxOptions(fill: Boolean = true, stroke: Boolean = 
         get() = noImpl
     open val type: SVGAnimatedString
         get() = noImpl
-    open val href: dynamic
-        get() = noImpl
-    open val origin: String
-        get() = noImpl
-    open var protocol: String
-        get() = noImpl
-        set(value) = noImpl
-    open var username: String
-        get() = noImpl
-        set(value) = noImpl
-    open var password: String
-        get() = noImpl
-        set(value) = noImpl
-    open var host: String
-        get() = noImpl
-        set(value) = noImpl
-    open var hostname: String
-        get() = noImpl
-        set(value) = noImpl
-    open var port: String
-        get() = noImpl
-        set(value) = noImpl
-    open var pathname: String
-        get() = noImpl
-        set(value) = noImpl
-    open var search: String
-        get() = noImpl
-        set(value) = noImpl
-    open var hash: String
-        get() = noImpl
-        set(value) = noImpl
 }
 
-@native public abstract class SVGViewElement : SVGElement() {
-    open val viewBox: SVGAnimatedRect
-        get() = noImpl
-    open val preserveAspectRatio: SVGAnimatedPreserveAspectRatio
-        get() = noImpl
-    open var zoomAndPan: Short
-        get() = noImpl
-        set(value) = noImpl
+@native public abstract class SVGViewElement : SVGElement(), SVGFitToViewBox, SVGZoomAndPan {
 
     companion object {
         val SVG_ZOOMANDPAN_UNKNOWN: Short = 0
