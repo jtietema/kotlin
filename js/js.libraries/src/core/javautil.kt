@@ -16,16 +16,13 @@
 
 package java.util
 
-@library
-public interface Comparator<T> {
-    public fun compare(obj1: T, obj2: T): Int
+interface Comparator<T> {
+    fun compare(obj1: T, obj2: T): Int
 }
 
-public inline fun <T> Comparator(crossinline comparison: (T, T) -> Int): Comparator<T> = object : Comparator<T> {
+inline fun <T> Comparator(crossinline comparison: (T, T) -> Int): Comparator<T> = object : Comparator<T> {
     override fun compare(obj1: T, obj2: T): Int = comparison(obj1, obj2)
 }
-
-
 
 @native
 public class Date() {

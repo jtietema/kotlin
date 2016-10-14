@@ -351,9 +351,10 @@
     };
 
     function isInheritanceFromTrait(metadata, trait) {
-        if (metadata == null || metadata.classIndex < trait.$metadata$.classIndex) {
+        // TODO: return this optimization
+        /*if (metadata == null || metadata.classIndex < trait.$metadata$.classIndex) {
             return false;
-        }
+        }*/
         var baseClasses = metadata.baseClasses;
         var i;
         for (i = 0; i < baseClasses.length; i++) {
@@ -380,8 +381,8 @@
             return false;
         }
 
-        if (typeof klass === "function") {
-            return object instanceof klass;
+        if (typeof klass === "function" && object instanceof klass) {
+            return true;
         }
 
         var proto = Object.getPrototypeOf(klass);

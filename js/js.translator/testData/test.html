@@ -1,11 +1,27 @@
 <!-- for debugging tests in browser -->
 <html>
 <head>
+  <script type="text/javascript">
+    var jsTestReporter = {
+        testStart: function() {
+        },
+        testSuccess: function() {
+        },
+        testFail: function () {
+        },
+        reportError: function(error) {
+            console.log(error);
+        }
+    };
+  </script>
+
   <script type="application/javascript" src="../../../dist/js/kotlin.js"></script>
-  <script type="application/javascript" src="box/native/out/eval_v5.js"></script>
+  <script type="application/javascript" src="jsTester/jsTester.js"></script>
+  <script type="application/javascript" src="jsUnitTests/out/IterableTests_v5.js"></script>
 
   <script type="application/javascript">
-    console.log(JS_TESTS.foo.box());
+    var test = new JS_TESTS.test.collections.IterableTest;
+    console.log(test.drop());
   </script>
 </head>
 <body>

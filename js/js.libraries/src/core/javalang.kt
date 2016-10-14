@@ -16,35 +16,58 @@
 
 package java.lang
 
-
-@library
-public interface Runnable {
-    public open fun run(): Unit
+interface Runnable {
+    fun run(): Unit
 }
 
-public fun Runnable(action: () -> Unit): Runnable = object : Runnable {
+fun Runnable(action: () -> Unit): Runnable = object : Runnable {
     override fun run() = action()
 }
 
-@library
-public interface Appendable {
-    public open fun append(csq: CharSequence?): Appendable
-    public open fun append(csq: CharSequence?, start: Int, end: Int): Appendable
-    public open fun append(c: Char): Appendable
+interface Appendable {
+    fun append(csq: CharSequence?): Appendable
+    fun append(csq: CharSequence?, start: Int, end: Int): Appendable
+    fun append(c: Char): Appendable
 }
 
-@library
-public class StringBuilder(content: String = "") : Appendable, CharSequence {
-    override val length: Int = noImpl
-    override fun get(index: Int): Char = noImpl
-    override fun subSequence(start: Int, end: Int): CharSequence = noImpl
-    override fun append(c: Char): StringBuilder = noImpl
-    override fun append(csq: CharSequence?): StringBuilder = noImpl
-    override fun append(csq: CharSequence?, start: Int, end: Int): StringBuilder = noImpl
-    public fun append(obj: Any?): StringBuilder = noImpl
-    public fun reverse(): StringBuilder = noImpl
-    override fun toString(): String = noImpl
-}
+class StringBuilder(content: String = "") : Appendable, CharSequence {
+    constructor(capacity: Int) : this() {}
 
-public inline fun StringBuilder(capacity: Int): StringBuilder = StringBuilder()
-public inline fun StringBuilder(content: CharSequence): StringBuilder = StringBuilder(content.toString())
+    constructor(content: CharSequence) : this(content.toString()) {}
+
+    private var string: String = content
+
+    override val length: Int = string.length
+
+    override fun get(index: Int): Char = string[index]
+
+    override fun subSequence(start: Int, end: Int): CharSequence = string.substring(start, end)
+
+    override fun append(c: Char): StringBuilder {
+        string += c
+        return this
+    }
+
+    override fun append(csq: CharSequence?): StringBuilder {
+        string += csq.toString()
+        return this
+    }
+
+    override fun append(csq: CharSequence?, start: Int, end: Int): StringBuilder {
+        string += csq.toString().substring(start, end)
+        return this
+    }
+
+    fun append(obj: Any?): StringBuilder {
+        string += obj.toString()
+        return this
+    }
+
+    fun reverse(): StringBuilder {
+        val nativeString: dynamic = string
+        string = nativeString.split("").reverse().join("")
+        return this
+    }
+
+    override fun toString(): String = string
+}
